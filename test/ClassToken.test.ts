@@ -2,17 +2,20 @@ import { expect } from "chai";
 import { ethers } from "hardhat";
 
 describe("ClassToken", function () {
-  // it 是 Mocha 测试框架中的一个测试用例定义函数
-  // 通常包含以下部分：
-  // 1. 描述字符串：说明测试的具体内容
-  // 2. 异步函数：包含实际的测试逻辑
-
   it("Should have the correct initial supply", async function () {
-    const initialSupply = ethers.parseEther("10000.0"); //convert to wei
-    const ClassToken = await ethers.getContractFactory("ClassToken");
-    const token = await ClassToken.deploy(initialSupply);
-    await token.deployed();
+    // Parse the initial supply (10,000 tokens with 18 decimals)
+    const initialSupply = ethers.parseEther("10000.0");
 
-    expect(await token.totalSupply()).to.equal(initialSupply);
+    // Get the contract factory
+    const ClassToken = await ethers.getContractFactory("ClassToken");
+
+    // Deploy the contract
+    const token = await ClassToken.deploy(initialSupply);
+
+    // No need for token.deployed() in ethers.js v6
+    const totalSupply = await token.totalSupply();
+    expect(totalSupply).to.equal(initialSupply);
+
+    console.log("ClassToken deployed to:", token.target); // Use .target for address
   });
 });
