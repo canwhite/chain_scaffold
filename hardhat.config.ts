@@ -13,6 +13,12 @@ const config: HardhatUserConfig = {
   //     accounts: [process.env.PRIVATE_KEY], // MetaMask 私钥
   //   },
   // },
+
+  // etherscan: {
+  //   apiKey: {
+  //     sepolia: process.env.ETHERSCAN_API_KEY as string,
+  //   },
+  // },
 };
 
 export default config;
